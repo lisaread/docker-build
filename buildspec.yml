@@ -12,6 +12,6 @@ phases:
   build:
     commands:
       - echo build stack
-      - docker stack deploy --compose-file docker-stack.yml vote
+      - docker stack deploy --compose-file $CODEBUILD_SRC_DIR/docker-stack.yml vote
       - echo check services
       - docker stack services vote
