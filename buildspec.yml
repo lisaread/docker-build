@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Starting build..."
+      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
+  pre_build:
+    commands:
+      - echo initialize docker swarm
+      - docker swarm init
+  build:
+    commands:
+      - echo build stack
+      - docker stack deploy --compose-file docker-stack.yml vote
+      - echo check services
+      - docker stack services vote
